@@ -1,12 +1,11 @@
 import datetime
-from datetime import datetime
 import threading
+from datetime import datetime
 
 from MsgSender import MsgSender
 
 
 class Scheduler:
-
     def __init__(self):
         self.__DATE_TIME_FORMAT = '%d/%m/%Y-%H:%M:%S'
         self.msg_sender = MsgSender()
