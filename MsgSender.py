@@ -2,7 +2,7 @@ import sys
 import time
 from selenium import webdriver
 
-TIMEOUT = 5
+TIMEOUT = 3
 WHATSAPP_URL = 'https://web.whatsapp.com/'
 
 
@@ -20,9 +20,16 @@ class MsgSender:
         driver.get(WHATSAPP_URL)
         time.sleep(TIMEOUT * 4)  # it takes time to scan the barcode.
 
-        search_box = driver.find_element_by_xpath(f'//*[@title="{contact}"]')
+        # press on the 'search contact' in whatsapp.
+        search_box = driver.find_element_by_xpath(f'//*[@class="_2S1VP copyable-text selectable-text"]')
         time.sleep(TIMEOUT)  # seconds
-        search_box.click()  # to enter whatsapp chat
+
+        search_box.send_keys(contact)  # search the contact in the search box.
+        time.sleep(TIMEOUT)  # seconds
+
+        contact_box = driver.find_element_by_xpath(f'//*[@title="{contact}"]')
+        time.sleep(TIMEOUT)  # seconds
+        contact_box.click()  # to enter whatsapp chat
         textbox = driver.find_elements_by_xpath(f'//*[@class="_2S1VP copyable-text selectable-text"]')[-1]
         textbox.send_keys(message)
         send_button = driver.find_element_by_class_name("_35EW6")
