@@ -15,7 +15,7 @@ class MsgSender:
         options.add_argument(
             'user-data-dir=C:\\Users\\Barak\\AppData\\Local\\Google\\Chrome\\User Data')
         # Be careful with pushing the session to Github!!
-        driver = webdriver.Chrome(executable_path=self.chrome_driver_path, chrome_options=options)
+        driver = webdriver.Chrome(executable_path=self.chrome_driver_path)
 
         driver.get(WHATSAPP_URL)
         time.sleep(TIMEOUT * 4)  # it takes time to scan the barcode.
