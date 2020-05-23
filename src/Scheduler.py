@@ -33,11 +33,10 @@ class Scheduler:
         print("the function was scheduled to date: " + schedule_date_str)
 
     def cancel_scheduled_msg(self, scheduled_time_str, contact):
-        timer = self.scheduled_messages.get((scheduled_time_str, contact))
+        timer = self.scheduled_messages.pop((scheduled_time_str, contact))
         if timer is not None:
             timer.cancel()
             print("canceled successfully msg to contact= {0} at time= {1}".format(contact, scheduled_time_str))
-
         else:
             print("Failed to cancel msg to contact= {0} at time= {1}".format(contact, scheduled_time_str))
 
