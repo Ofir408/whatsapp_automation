@@ -58,6 +58,9 @@ class ScheduleMessageDialog(wx.Dialog):
                                     label=translation.get_schedule_message_dialog_submit_label())
         self.submit_btn.Bind(wx.EVT_BUTTON, self.on_click)
 
+        # Capture ENTER key
+        self.submit_btn.SetDefault()
+
         # Arrange on screen
         self.main_sizer.Add(self.contact_input, 0, wx.EXPAND)
         self.main_sizer.Add(self.message_input, 1, wx.EXPAND)
@@ -87,6 +90,6 @@ class ScheduleMessageDialog(wx.Dialog):
         time = str(self.time_picker.Value).split(' ')[1]
         date_time = f'{date}-{time}'
 
-        self.scheduler.scheduler_func(date_time,
-                                      message,
-                                      contact)
+        self.scheduler.schedule(date_time,
+                                message,
+                                contact)

@@ -52,6 +52,9 @@ class WhatsAppAutomationFrame(wx.Frame):
                                          label=translation.get_schedule_new_message_button_label())
         self.new_message_btn.Bind(wx.EVT_BUTTON, self.on_click)
 
+        # Capture ENTER key
+        self.new_message_btn.SetDefault()
+
         # Arrange on screen
         self.main_sizer.Add(self.messages_list, 1, wx.ALL | wx.EXPAND)
         self.main_sizer.Add(self.new_message_btn, 0, wx.CENTER)
