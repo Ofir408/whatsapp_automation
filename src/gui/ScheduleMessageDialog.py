@@ -62,4 +62,13 @@ class ScheduleMessageDialog(wx.Dialog):
         self.Close()
 
     def _submit(self):
-        pass
+        contact = str(self.contact_input.Value)
+        message = str(self.message_input.Value)
+
+        date = str(self.date_picker.Value).split(' ')[0]
+        time = str(self.time_picker.Value).split(' ')[1]
+        date_time = f'{date}-{time}'
+
+        self.scheduler.scheduler_func(date_time,
+                                      message,
+                                      contact)
