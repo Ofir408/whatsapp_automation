@@ -1,5 +1,6 @@
 import sys
 import time
+
 from selenium import webdriver
 
 TIMEOUT = 3
@@ -8,12 +9,13 @@ WHATSAPP_URL = 'https://web.whatsapp.com/'
 
 class MsgSender:
     def __init__(self, chrome_driver_path):
+        self.driver = None
         self.chrome_driver_path = chrome_driver_path
 
     def send_whatsapp_message(self, message, contact):
         options = webdriver.ChromeOptions()
         options.add_argument(
-            'user-data-dir=C:\\Users\\Barak\\AppData\\Local\\Google\\Chrome\\User Data')
+            'user-data-dir=C:\\Users\\Barak\\AppData\\Local\\Google\\Chrome\\User Data\\Default')
         # Be careful with pushing the session to Github!!
         driver = webdriver.Chrome(executable_path=self.chrome_driver_path, chrome_options=options)
 
@@ -35,7 +37,9 @@ class MsgSender:
         send_button = driver.find_element_by_class_name("_35EW6")
         send_button.click()
         time.sleep(TIMEOUT)  # seconds
-        driver.quit()
+
+    def close(self):
+        self.driver.quit()
 
 
 if __name__ == '__main__':
