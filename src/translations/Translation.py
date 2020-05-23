@@ -30,6 +30,10 @@ class Translation(ABC):
         pass
 
     @abstractmethod
+    def get_date_time_input_label(self) -> str:
+        pass
+
+    @abstractmethod
     def get_schedule_message_dialog_submit_label(self) -> str:
         pass
 

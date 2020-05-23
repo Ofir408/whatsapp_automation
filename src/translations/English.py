@@ -25,6 +25,9 @@ class EnglishTranslation(Translation):
     def get_message_input_hint(self) -> str:
         return 'Enter message'
 
+    def get_date_time_input_label(self) -> str:
+        return 'Select message time&date: '
+
     def get_schedule_message_dialog_submit_label(self) -> str:
         return 'Submit!'
 
