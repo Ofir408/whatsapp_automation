@@ -1,10 +1,12 @@
 from src.translations.English import EnglishTranslation
+from src.translations.Hebrew import HebrewTranslation
 
 
 class TranslationFactory(object):
     TRANSLATIONS = {
         'Default': EnglishTranslation,
-        'English': EnglishTranslation
+        'English': EnglishTranslation,
+        'Hebrew': HebrewTranslation
     }
 
     @classmethod
