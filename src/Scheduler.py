@@ -1,9 +1,10 @@
-import datetime
 import sys
+import datetime
 import threading
+
 from datetime import datetime
 
-from src.MsgSender import MsgSender
+from src.message_sender import MsgSender
 
 
 class Scheduler:
@@ -13,7 +14,7 @@ class Scheduler:
         self.msg_sender = MsgSender(chrome_driver_path)
 
     # schedule_date format, for example: 22/12/2020-22:30:59
-    def scheduler_func(self, schedule_date_str, msg, contact):
+    def schedule(self, schedule_date_str, msg, contact):
         now = datetime.now()
         later_time_datetime = datetime.strptime(schedule_date_str, self.__DATE_TIME_FORMAT)
         delay = later_time_datetime - now
@@ -43,7 +44,7 @@ class Scheduler:
 
 if __name__ == '__main__':
     scheduler = Scheduler(sys.argv[1:2])  # chrome path as an argument.
-    scheduler.scheduler_func("22/05/2020-23:48:40", "test", "Selenium-Test")  # TODO - change it.
+    scheduler.schedule("22/05/2020-23:48:40", "test", "Selenium-Test")  # TODO - change it.
 
     # try to cancel the scheduled task.
     #scheduler.cancel_scheduled_msg("22/05/2020-23:48:40", "Selenium-Test")
