@@ -1,4 +1,5 @@
 import argparse
+import locale
 import wx
 
 from wx.lib.agw import ultimatelistctrl as ulc
@@ -133,6 +134,10 @@ def main():
     scheduler = Scheduler(args.path)
 
     app = wx.App()
+
+    # Fix datetime.strptime issue
+    locale.setlocale(locale.LC_ALL, 'C')
+
     frame = WhatsAppAutomationFrame(translation, scheduler)
 
     app.MainLoop()

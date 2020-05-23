@@ -86,8 +86,8 @@ class ScheduleMessageDialog(wx.Dialog):
         contact = str(self.contact_input.Value)
         message = str(self.message_input.Value)
 
-        date = str(self.date_picker.Value).split(' ')[0]
-        time = str(self.time_picker.Value).split(' ')[1]
+        date = self.date_picker.Value.Format('%d/%m/%Y')
+        time = self.time_picker.Value.Format('%H:%M:%S')
         date_time = f'{date}-{time}'
 
         res = self.scheduler.schedule(date_time,
