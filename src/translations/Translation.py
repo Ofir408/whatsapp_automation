@@ -52,4 +52,12 @@ class Translation(ABC):
     def get_schedule_message_dialog_submit_label(self) -> str:
         pass
 
+    @abstractmethod
+    def get_invalid_date_message_content(self) -> str:
+        pass
+
+    @abstractmethod
+    def get_invalid_date_message_title(self) -> str:
+        pass
+
 

@@ -23,6 +23,7 @@ class ScheduleMessageDialog(wx.Dialog):
         super(ScheduleMessageDialog, self).__init__(parent=parent,
                                                     title=translation.get_schedule_message_dialog_title())
         self.scheduler = scheduler
+        self.translation = translation
 
         # Set language appropriate layout
         self.SetLayoutDirection(translation.get_window_layout_style())
@@ -74,11 +75,10 @@ class ScheduleMessageDialog(wx.Dialog):
         An event that will be triggered when clicking the 'Submit' button.
         :param event: The click event
         """
-        self._submit()
+        if self._submit():
+            self.Close()
 
-        self.Close()
-
-    def _submit(self):
+    def _submit(self) -> bool:
         """
         Inner submit function:
         Extracts the new message's parameters and schedules it.
@@ -90,6 +90,12 @@ class ScheduleMessageDialog(wx.Dialog):
         time = str(self.time_picker.Value).split(' ')[1]
         date_time = f'{date}-{time}'
 
-        self.scheduler.schedule(date_time,
-                                message,
-                                contact)
+        res = self.scheduler.schedule(date_time,
+                                      message,
+                                      contact)
+        if not res:
+            wx.MessageBox(self.translation.get_invalid_date_message_content(),
+                          self.translation.get_invalid_date_message_title(),
+                          wx.OK | wx.ICON_ERROR)
+
+        return res

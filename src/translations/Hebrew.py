@@ -43,3 +43,9 @@ class HebrewTranslation(Translation):
 
     def get_schedule_message_dialog_submit_label(self) -> str:
         return 'שלח/י!'
+
+    def get_invalid_date_message_content(self) -> str:
+        return 'בחר/י תאריך עתידי.'
+
+    def get_invalid_date_message_title(self) -> str:
+        return 'תאריך לא תקין'

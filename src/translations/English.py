@@ -38,7 +38,13 @@ class EnglishTranslation(Translation):
         return 'Enter message'
 
     def get_date_time_input_label(self) -> str:
-        return 'Select message time&date: '
+        return 'Select message time and date: '
 
     def get_schedule_message_dialog_submit_label(self) -> str:
         return 'Submit!'
+
+    def get_invalid_date_message_content(self) -> str:
+        return 'Please select a future date.'
+
+    def get_invalid_date_message_title(self) -> str:
+        return 'Invalid date!'
