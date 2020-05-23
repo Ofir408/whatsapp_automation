@@ -1,7 +1,13 @@
+import wx
+
 from src.translations.Translation import Translation
 
 
 class EnglishTranslation(Translation):
+    # Window layout
+    def get_window_layout_style(self) -> int:
+        return wx.Layout_LeftToRight
+
     # MainWindow Strings
     def get_main_window_title(self) -> str:
         return 'WhatsApp Automation'

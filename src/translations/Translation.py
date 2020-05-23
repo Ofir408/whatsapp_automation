@@ -2,6 +2,11 @@ from abc import ABC, abstractmethod
 
 
 class Translation(ABC):
+    # Window layout
+    @abstractmethod
+    def get_window_layout_style(self) -> int:
+        pass
+
     # WhatsAppAutomationFrame strings
     @abstractmethod
     def get_main_window_title(self) -> str:
