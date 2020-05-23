@@ -6,10 +6,20 @@ from src.translations.Translation import Translation
 
 
 class ScheduleMessageDialog(wx.Dialog):
+    """
+    The popup to show when inserting a new message.
+    """
+
     def __init__(self,
                  parent,
                  translation: Translation,
                  scheduler: Scheduler):
+        """
+        Create the popup
+        :param parent: The creator frame of the popup
+        :param translation: The Translation object to use strings from.
+        :param scheduler: The Scheduler to use.
+        """
         super(ScheduleMessageDialog, self).__init__(parent=parent,
                                                     title=translation.get_schedule_message_dialog_title())
         self.scheduler = scheduler
@@ -57,11 +67,19 @@ class ScheduleMessageDialog(wx.Dialog):
         self.main_panel.SetSizer(self.main_sizer)
 
     def on_click(self, event):
+        """
+        An event that will be triggered when clicking the 'Submit' button.
+        :param event: The click event
+        """
         self._submit()
 
         self.Close()
 
     def _submit(self):
+        """
+        Inner submit function:
+        Extracts the new message's parameters and schedules it.
+        """
         contact = str(self.contact_input.Value)
         message = str(self.message_input.Value)
 

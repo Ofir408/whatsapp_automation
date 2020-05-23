@@ -2,6 +2,9 @@ from abc import ABC, abstractmethod
 
 
 class Translation(ABC):
+    """
+    An abstract class for every future translation.
+    """
     # Window layout
     @abstractmethod
     def get_window_layout_style(self) -> int:
@@ -10,6 +13,18 @@ class Translation(ABC):
     # WhatsAppAutomationFrame strings
     @abstractmethod
     def get_main_window_title(self) -> str:
+        pass
+
+    @abstractmethod
+    def get_contact_column_title(self) -> str:
+        pass
+
+    @abstractmethod
+    def get_date_time_column_title(self) -> str:
+        pass
+
+    @abstractmethod
+    def get_cancel_button_label(self) -> str:
         pass
 
     @abstractmethod

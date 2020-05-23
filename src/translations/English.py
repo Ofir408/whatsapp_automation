@@ -4,6 +4,9 @@ from src.translations.Translation import Translation
 
 
 class EnglishTranslation(Translation):
+    """
+    English translation of the GUI strings.
+    """
     # Window layout
     def get_window_layout_style(self) -> int:
         return wx.Layout_LeftToRight
@@ -11,6 +14,15 @@ class EnglishTranslation(Translation):
     # MainWindow Strings
     def get_main_window_title(self) -> str:
         return 'WhatsApp Automation'
+
+    def get_contact_column_title(self) -> str:
+        return 'Contact'
+
+    def get_date_time_column_title(self) -> str:
+        return 'Date & Time'
+
+    def get_cancel_button_label(self) -> str:
+        return 'Cancel'
 
     def get_schedule_new_message_button_label(self) -> str:
         return 'Add message'
