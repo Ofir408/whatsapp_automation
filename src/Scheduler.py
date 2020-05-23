@@ -28,12 +28,12 @@ class Scheduler:
             exit(1)
 
         timer = threading.Timer(seconds_to_wait, self.msg_sender.send_whatsapp_message, [msg, contact])
-        self.scheduled_messages[schedule_date_str + contact] = timer
+        self.scheduled_messages[(schedule_date_str, contact)] = timer
         timer.start()
         print("the function was scheduled to date: " + schedule_date_str)
 
     def cancel_scheduled_msg(self, scheduled_time_str, contact):
-        timer = self.scheduled_messages.get(scheduled_time_str + contact)
+        timer = self.scheduled_messages.get((scheduled_time_str, contact))
         if timer is not None:
             timer.cancel()
             print("canceled successfully msg to contact= {0} at time= {1}".format(contact, scheduled_time_str))
