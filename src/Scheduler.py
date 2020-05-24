@@ -1,10 +1,20 @@
+import os
 import sys
 import datetime
 import threading
 
 from datetime import datetime
+from webbrowser import browser
 
-from src.message_sender import MsgSender
+from selenium.webdriver.support import expected_conditions as EC
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+
+from src.MessageSender import MsgSender
+
+TIMEOUT = 3
+WHATSAPP_URL = 'https://web.whatsapp.com/'
 
 
 class Scheduler:
@@ -12,6 +22,7 @@ class Scheduler:
         self.__DATE_TIME_FORMAT = '%d/%m/%Y-%H:%M:%S'
         self.scheduled_messages = {}  # dict between date:Timer in order to have the option to cancel the scheduled msg
         self.msg_sender = MsgSender(chrome_driver_path)
+        self.init_barcode(chrome_driver_path)
 
     # schedule_date format, for example: 22/12/2020-22:30:59
     def schedule(self, schedule_date_str, msg, contact) -> bool:
@@ -41,11 +52,24 @@ class Scheduler:
         else:
             print("Failed to cancel msg to contact= {0} at time= {1}".format(contact, scheduled_time_str))
 
+    def init_barcode(self, chrome_path_driver):
+        options = webdriver.ChromeOptions()
+        user_dir = os.path.join(os.path.expandvars('%LocalAppData%'),
+                                'Google', 'Chrome', 'User Data', 'Default')
+        options.add_argument(
+            f'user-data-dir={user_dir}')
+        # Be careful with pushing the session to Github!!
+        driver = webdriver.Chrome(executable_path=chrome_path_driver, chrome_options=options)
+
+        driver.get(WHATSAPP_URL)
+        WebDriverWait(driver, 60).until(
+            EC.presence_of_element_located((By.XPATH, "//*[@id=\"app\"]/div/div/div[3]")))
+        driver.quit()
+
 
 if __name__ == '__main__':
     scheduler = Scheduler(sys.argv[1:2])  # chrome path as an argument.
     scheduler.schedule("22/05/2020-23:48:40", "test", "Selenium-Test")  # TODO - change it.
 
     # try to cancel the scheduled task.
-    #scheduler.cancel_scheduled_msg("22/05/2020-23:48:40", "Selenium-Test")
-
+    # scheduler.cancel_scheduled_msg("22/05/2020-23:48:40", "Selenium-Test")
