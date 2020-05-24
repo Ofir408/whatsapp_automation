@@ -1,4 +1,5 @@
 import sys
+import os
 import time
 
 from selenium import webdriver
@@ -14,8 +15,10 @@ class MsgSender:
 
     def send_whatsapp_message(self, message, contact):
         options = webdriver.ChromeOptions()
+        user_dir = os.path.join(os.path.expandvars('%LocalAppData%'),
+                                'Google', 'Chrome', 'User Data')
         options.add_argument(
-            'user-data-dir=C:\\Users\\Barak\\AppData\\Local\\Google\\Chrome\\User Data\\Default')
+            f'user-data-dir={user_dir}')
         # Be careful with pushing the session to Github!!
         driver = webdriver.Chrome(executable_path=self.chrome_driver_path, chrome_options=options)
 
