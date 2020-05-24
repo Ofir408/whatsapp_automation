@@ -6,16 +6,12 @@ from datetime import datetime
 
 from src.MessageSender import MsgSender
 
-TIMEOUT = 3
-WHATSAPP_URL = 'https://web.whatsapp.com/'
-
 
 class Scheduler:
     def __init__(self, chrome_driver_path):
         self.__DATE_TIME_FORMAT = '%d/%m/%Y-%H:%M:%S'
         self.scheduled_messages = {}  # dict between date:Timer in order to have the option to cancel the scheduled msg
         self.msg_sender = MsgSender(chrome_driver_path)
-
 
     # schedule_date format, for example: 22/12/2020-22:30:59
     def schedule(self, schedule_date_str, msg, contact) -> bool:
