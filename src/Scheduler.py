@@ -1,10 +1,13 @@
-import sys
+
 import datetime
 import threading
 
 from datetime import datetime
 
-from src.message_sender import MsgSender
+from src.MessageSender import MsgSender
+
+TIMEOUT = 3
+WHATSAPP_URL = 'https://web.whatsapp.com/'
 
 
 class Scheduler:
@@ -12,6 +15,7 @@ class Scheduler:
         self.__DATE_TIME_FORMAT = '%d/%m/%Y-%H:%M:%S'
         self.scheduled_messages = {}  # dict between date:Timer in order to have the option to cancel the scheduled msg
         self.msg_sender = MsgSender(chrome_driver_path)
+        self.init_barcode(chrome_driver_path)
 
     # schedule_date format, for example: 22/12/2020-22:30:59
     def schedule(self, schedule_date_str, msg, contact) -> bool:
@@ -42,10 +46,4 @@ class Scheduler:
             print("Failed to cancel msg to contact= {0} at time= {1}".format(contact, scheduled_time_str))
 
 
-if __name__ == '__main__':
-    scheduler = Scheduler(sys.argv[1:2])  # chrome path as an argument.
-    scheduler.schedule("22/05/2020-23:48:40", "test", "Selenium-Test")  # TODO - change it.
-
-    # try to cancel the scheduled task.
-    #scheduler.cancel_scheduled_msg("22/05/2020-23:48:40", "Selenium-Test")
 
