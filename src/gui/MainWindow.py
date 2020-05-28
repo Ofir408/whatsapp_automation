@@ -138,7 +138,7 @@ def main():
     # Fix datetime.strptime issue
     locale.setlocale(locale.LC_ALL, 'C')
 
-    frame = WhatsAppAutomationFrame(translation, scheduler)
+    _ = WhatsAppAutomationFrame(translation, scheduler)
 
     app.MainLoop()
 
